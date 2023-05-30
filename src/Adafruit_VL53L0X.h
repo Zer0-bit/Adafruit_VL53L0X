@@ -49,10 +49,10 @@ public:
     VL53L0X_SENSE_HIGH_ACCURACY
   } VL53L0X_Sense_config_t;
 
-  boolean begin(uint8_t i2c_addr = VL53L0X_I2C_ADDR, boolean debug = false,
+  bool begin(uint8_t i2c_addr = VL53L0X_I2C_ADDR, bool debug = false,
                 TwoWire *i2c = &Wire,
                 VL53L0X_Sense_config_t vl_config = VL53L0X_SENSE_DEFAULT);
-  boolean setAddress(uint8_t newAddr);
+  bool setAddress(uint8_t newAddr);
 
   // uint8_t getAddress(void); // not currently implemented
 
@@ -68,45 +68,45 @@ public:
   /**************************************************************************/
   VL53L0X_Error
   rangingTest(VL53L0X_RangingMeasurementData_t *pRangingMeasurementData,
-              boolean debug = false) {
+              bool debug = false) {
     return getSingleRangingMeasurement(pRangingMeasurementData, debug);
   };
 
   VL53L0X_Error getSingleRangingMeasurement(
       VL53L0X_RangingMeasurementData_t *pRangingMeasurementData,
-      boolean debug = false);
+      bool debug = false);
   void
   printRangeStatus(VL53L0X_RangingMeasurementData_t *pRangingMeasurementData);
 
   VL53L0X_Error getRangingMeasurement(
       VL53L0X_RangingMeasurementData_t *pRangingMeasurementData,
-      boolean debug = false);
-  VL53L0X_Error startMeasurement(boolean debug = false);
-  VL53L0X_Error stopMeasurement(boolean debug = false);
+      bool debug = false);
+  VL53L0X_Error startMeasurement(bool debug = false);
+  VL53L0X_Error stopMeasurement(bool debug = false);
   VL53L0X_Error getLimitCheckCurrent(uint8_t LimitCheckId,
                                      FixPoint1616_t *pLimitCheckCurrent,
-                                     boolean debug = false);
+                                     bool debug = false);
   VL53L0X_Error getDeviceMode(VL53L0X_DeviceModes *pDeviceMode,
-                              boolean debug = false);
+                              bool debug = false);
   VL53L0X_Error setDeviceMode(VL53L0X_DeviceModes DeviceMode,
-                              boolean debug = false);
+                              bool debug = false);
 
   VL53L0X_Error setInterruptThresholds(FixPoint1616_t ThresholdLow,
                                        FixPoint1616_t ThresholdHigh,
-                                       boolean debug = false);
+                                       bool debug = false);
   VL53L0X_Error getInterruptThresholds(FixPoint1616_t *pThresholdLow,
                                        FixPoint1616_t *pThresholdHigh,
-                                       boolean debug = false);
-  VL53L0X_Error clearInterruptMask(boolean debug = false);
+                                       bool debug = false);
+  VL53L0X_Error clearInterruptMask(bool debug = false);
 
   VL53L0X_Error getGpioConfig(VL53L0X_DeviceModes *pDeviceMode,
                               VL53L0X_GpioFunctionality *pFunctionality,
                               VL53L0X_InterruptPolarity *pPolarity,
-                              boolean debug = false);
+                              bool debug = false);
   VL53L0X_Error setGpioConfig(VL53L0X_DeviceModes DeviceMode,
                               VL53L0X_GpioFunctionality Functionality,
                               VL53L0X_InterruptPolarity Polarity,
-                              boolean debug = false);
+                              bool debug = false);
 
   VL53L0X_Error Status =
       VL53L0X_ERROR_NONE; ///< indicates whether or not the sensor has
@@ -116,12 +116,12 @@ public:
   // float readLux(uint8_t gain);
   uint8_t readRangeStatus(void);
 
-  boolean startRange(void);
-  boolean isRangeComplete(void);
-  boolean waitRangeComplete(void);
+  bool startRange(void);
+  bool isRangeComplete(void);
+  bool waitRangeComplete(void);
   uint16_t readRangeResult(void);
 
-  boolean startRangeContinuous(uint16_t period_ms = 50);
+  bool startRangeContinuous(uint16_t period_ms = 50);
   void stopRangeContinuous(void);
 
   //  void setTimeout(uint16_t timeout) { io_timeout = timeout; }
@@ -132,24 +132,24 @@ public:
       @returns True if timeout has occurred, False otherwise
   */
   /**************************************************************************/
-  boolean timeoutOccurred(void) { return false; }
+  bool timeoutOccurred(void) { return false; }
 
-  boolean configSensor(VL53L0X_Sense_config_t vl_config);
+  bool configSensor(VL53L0X_Sense_config_t vl_config);
 
   // Export some wrappers to internal setting functions
   // that are used by the above helper function to allow
   // more complete control.
-  boolean setMeasurementTimingBudgetMicroSeconds(uint32_t budget_us);
+  bool setMeasurementTimingBudgetMicroSeconds(uint32_t budget_us);
   uint32_t getMeasurementTimingBudgetMicroSeconds(void);
 
-  boolean setVcselPulsePeriod(VL53L0X_VcselPeriod VcselPeriodType,
+  bool setVcselPulsePeriod(VL53L0X_VcselPeriod VcselPeriodType,
                               uint8_t VCSELPulsePeriod);
 
   uint8_t getVcselPulsePeriod(VL53L0X_VcselPeriod VcselPeriodType);
 
-  boolean setLimitCheckEnable(uint16_t LimitCheckId, uint8_t LimitCheckEnable);
+  bool setLimitCheckEnable(uint16_t LimitCheckId, uint8_t LimitCheckEnable);
   uint8_t getLimitCheckEnable(uint16_t LimitCheckId);
-  boolean setLimitCheckValue(uint16_t LimitCheckId,
+  bool setLimitCheckValue(uint16_t LimitCheckId,
                              FixPoint1616_t LimitCheckValue);
   FixPoint1616_t getLimitCheckValue(uint16_t LimitCheckId);
 

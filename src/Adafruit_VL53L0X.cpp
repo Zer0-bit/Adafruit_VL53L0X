@@ -54,7 +54,7 @@
     @returns True if device is set up, false on any failure
 */
 /**************************************************************************/
-boolean Adafruit_VL53L0X::begin(uint8_t i2c_addr, boolean debug, TwoWire *i2c,
+bool Adafruit_VL53L0X::begin(uint8_t i2c_addr, bool debug, TwoWire *i2c,
                                 VL53L0X_Sense_config_t vl_config) {
   uint32_t refSpadCount;
   uint8_t isApertureSpads;
@@ -191,7 +191,7 @@ boolean Adafruit_VL53L0X::begin(uint8_t i2c_addr, boolean debug, TwoWire *i2c,
     @returns True if address was set successfully, False otherwise
 */
 /**************************************************************************/
-boolean Adafruit_VL53L0X::setAddress(uint8_t newAddr) {
+bool Adafruit_VL53L0X::setAddress(uint8_t newAddr) {
   newAddr &= 0x7F;
 
   Status = VL53L0X_SetDeviceAddress(pMyDevice, newAddr * 2); // 7->8 bit
@@ -219,7 +219,7 @@ boolean Adafruit_VL53L0X::setAddress(uint8_t newAddr) {
     @returns True if address was set successfully, False otherwise
 */
 /**************************************************************************/
-boolean Adafruit_VL53L0X::configSensor(VL53L0X_Sense_config_t vl_config) {
+bool Adafruit_VL53L0X::configSensor(VL53L0X_Sense_config_t vl_config) {
   // All of them appear to configure a few things
 
   // Serial.print(F("VL53L0X: configSensor "));
@@ -326,7 +326,7 @@ boolean Adafruit_VL53L0X::configSensor(VL53L0X_Sense_config_t vl_config) {
 */
 /**************************************************************************/
 VL53L0X_Error Adafruit_VL53L0X::getSingleRangingMeasurement(
-    VL53L0X_RangingMeasurementData_t *RangingMeasurementData, boolean debug) {
+    VL53L0X_RangingMeasurementData_t *RangingMeasurementData, bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   FixPoint1616_t LimitCheckCurrent;
 
@@ -368,7 +368,7 @@ VL53L0X_Error Adafruit_VL53L0X::getSingleRangingMeasurement(
     @returns status code
 */
 /**************************************************************************/
-VL53L0X_Error Adafruit_VL53L0X::startMeasurement(boolean debug) {
+VL53L0X_Error Adafruit_VL53L0X::startMeasurement(bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
 
   if (Status == VL53L0X_ERROR_NONE) {
@@ -389,7 +389,7 @@ VL53L0X_Error Adafruit_VL53L0X::startMeasurement(boolean debug) {
     @returns status code
 */
 /**************************************************************************/
-VL53L0X_Error Adafruit_VL53L0X::stopMeasurement(boolean debug) {
+VL53L0X_Error Adafruit_VL53L0X::stopMeasurement(bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   if (Status == VL53L0X_ERROR_NONE) {
     if (debug) {
@@ -413,7 +413,7 @@ VL53L0X_Error Adafruit_VL53L0X::stopMeasurement(boolean debug) {
 */
 /**************************************************************************/
 VL53L0X_Error Adafruit_VL53L0X::getLimitCheckCurrent(
-    uint8_t LimitCheckId, FixPoint1616_t *pLimitCheckCurrent, boolean debug) {
+    uint8_t LimitCheckId, FixPoint1616_t *pLimitCheckCurrent, bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   uint16_t intLimitCheckId = LimitCheckId;
 
@@ -446,7 +446,7 @@ VL53L0X_Error Adafruit_VL53L0X::getLimitCheckCurrent(
 */
 /**************************************************************************/
 VL53L0X_Error Adafruit_VL53L0X::setDeviceMode(VL53L0X_DeviceModes DeviceMode,
-                                              boolean debug) {
+                                              bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   if (Status == VL53L0X_ERROR_NONE) {
     if (debug) {
@@ -469,7 +469,7 @@ VL53L0X_Error Adafruit_VL53L0X::setDeviceMode(VL53L0X_DeviceModes DeviceMode,
 */
 /**************************************************************************/
 VL53L0X_Error Adafruit_VL53L0X::setInterruptThresholds(
-    FixPoint1616_t ThresholdLow, FixPoint1616_t ThresholdHigh, boolean debug) {
+    FixPoint1616_t ThresholdLow, FixPoint1616_t ThresholdHigh, bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   if (Status == VL53L0X_ERROR_NONE) {
     if (debug) {
@@ -499,7 +499,7 @@ VL53L0X_Error Adafruit_VL53L0X::setInterruptThresholds(
 VL53L0X_Error
 Adafruit_VL53L0X::getInterruptThresholds(FixPoint1616_t *pThresholdLow,
                                          FixPoint1616_t *pThresholdHigh,
-                                         boolean debug) {
+                                         bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   if (Status == VL53L0X_ERROR_NONE) {
     if (debug) {
@@ -526,7 +526,7 @@ Adafruit_VL53L0X::getInterruptThresholds(FixPoint1616_t *pThresholdLow,
 */
 /**************************************************************************/
 VL53L0X_Error Adafruit_VL53L0X::getDeviceMode(VL53L0X_DeviceModes *pDeviceMode,
-                                              boolean debug) {
+                                              bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   if (Status == VL53L0X_ERROR_NONE) {
     if (debug) {
@@ -546,7 +546,7 @@ VL53L0X_Error Adafruit_VL53L0X::getDeviceMode(VL53L0X_DeviceModes *pDeviceMode,
     @returns status code
 */
 /**************************************************************************/
-VL53L0X_Error Adafruit_VL53L0X::clearInterruptMask(boolean debug) {
+VL53L0X_Error Adafruit_VL53L0X::clearInterruptMask(bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   if (Status == VL53L0X_ERROR_NONE) {
     if (debug) {
@@ -571,7 +571,7 @@ VL53L0X_Error Adafruit_VL53L0X::clearInterruptMask(boolean debug) {
 /**************************************************************************/
 VL53L0X_Error Adafruit_VL53L0X::setGpioConfig(
     VL53L0X_DeviceModes DeviceMode, VL53L0X_GpioFunctionality Functionality,
-    VL53L0X_InterruptPolarity Polarity, boolean debug) {
+    VL53L0X_InterruptPolarity Polarity, bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   if (Status == VL53L0X_ERROR_NONE) {
     if (debug) {
@@ -599,7 +599,7 @@ VL53L0X_Error Adafruit_VL53L0X::setGpioConfig(
 /**************************************************************************/
 VL53L0X_Error Adafruit_VL53L0X::getGpioConfig(
     VL53L0X_DeviceModes *pDeviceMode, VL53L0X_GpioFunctionality *pFunctionality,
-    VL53L0X_InterruptPolarity *pPolarity, boolean debug) {
+    VL53L0X_InterruptPolarity *pPolarity, bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   if (Status == VL53L0X_ERROR_NONE) {
     if (debug) {
@@ -626,7 +626,7 @@ VL53L0X_Error Adafruit_VL53L0X::getGpioConfig(
 */
 /**************************************************************************/
 VL53L0X_Error Adafruit_VL53L0X::getRangingMeasurement(
-    VL53L0X_RangingMeasurementData_t *RangingMeasurementData, boolean debug) {
+    VL53L0X_RangingMeasurementData_t *RangingMeasurementData, bool debug) {
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   FixPoint1616_t LimitCheckCurrent;
 
@@ -720,7 +720,7 @@ uint8_t Adafruit_VL53L0X::readRangeStatus(void) { return _rangeStatus; }
 */
 /**************************************************************************/
 
-boolean Adafruit_VL53L0X::startRange(void) {
+bool Adafruit_VL53L0X::startRange(void) {
 
   /* This function will do a complete single ranging
    * Here we fix the mode! */
@@ -741,7 +741,7 @@ boolean Adafruit_VL53L0X::startRange(void) {
 */
 /**************************************************************************/
 
-boolean Adafruit_VL53L0X::isRangeComplete(void) {
+bool Adafruit_VL53L0X::isRangeComplete(void) {
   uint8_t NewDataReady = 0;
   Status = VL53L0X_GetMeasurementDataReady(pMyDevice, &NewDataReady);
   return ((Status != VL53L0X_ERROR_NONE) || (NewDataReady == 1));
@@ -754,7 +754,7 @@ boolean Adafruit_VL53L0X::isRangeComplete(void) {
 */
 /**************************************************************************/
 
-boolean Adafruit_VL53L0X::waitRangeComplete(void) {
+bool Adafruit_VL53L0X::waitRangeComplete(void) {
   Status = VL53L0X_measurement_poll_for_completion(pMyDevice);
 
   return (Status == VL53L0X_ERROR_NONE);
@@ -788,7 +788,7 @@ uint16_t Adafruit_VL53L0X::readRangeResult(void) {
     @return True if successful, false otherwise
 */
 /**************************************************************************/
-boolean Adafruit_VL53L0X::startRangeContinuous(uint16_t period_ms) {
+bool Adafruit_VL53L0X::startRangeContinuous(uint16_t period_ms) {
   /* This function will do a complete single ranging
    * Here we fix the mode! */
   // first lets set the device in SINGLE_Ranging mode
@@ -852,7 +852,7 @@ void Adafruit_VL53L0X::stopRangeContinuous(void) {
     @returns True if success
 */
 /**************************************************************************/
-boolean
+bool
 Adafruit_VL53L0X::setMeasurementTimingBudgetMicroSeconds(uint32_t budget_us) {
   Status = VL53L0X_SetMeasurementTimingBudgetMicroSeconds(pMyDevice, budget_us);
   return (Status == VL53L0X_ERROR_NONE);
@@ -881,7 +881,7 @@ uint32_t Adafruit_VL53L0X::getMeasurementTimingBudgetMicroSeconds() {
     @returns True if success
 */
 /**************************************************************************/
-boolean
+bool
 Adafruit_VL53L0X::setVcselPulsePeriod(VL53L0X_VcselPeriod VcselPeriodType,
                                       uint8_t VCSELPulsePeriod) {
   Status =
@@ -917,7 +917,7 @@ Adafruit_VL53L0X::getVcselPulsePeriod(VL53L0X_VcselPeriod VcselPeriodType) {
     @return  true if succeeded
  */
 /**************************************************************************/
-boolean Adafruit_VL53L0X::setLimitCheckEnable(uint16_t LimitCheckId,
+bool Adafruit_VL53L0X::setLimitCheckEnable(uint16_t LimitCheckId,
                                               uint8_t LimitCheckEnable) {
   Status =
       VL53L0X_SetLimitCheckEnable(pMyDevice, LimitCheckId, LimitCheckEnable);
@@ -950,7 +950,7 @@ uint8_t Adafruit_VL53L0X::getLimitCheckEnable(uint16_t LimitCheckId) {
  */
 /**************************************************************************/
 
-boolean Adafruit_VL53L0X::setLimitCheckValue(uint16_t LimitCheckId,
+bool Adafruit_VL53L0X::setLimitCheckValue(uint16_t LimitCheckId,
                                              FixPoint1616_t LimitCheckValue) {
 
   Status = VL53L0X_SetLimitCheckValue(pMyDevice, LimitCheckId, LimitCheckValue);
